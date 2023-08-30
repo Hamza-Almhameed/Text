@@ -1,0 +1,25 @@
+body{
+    background-color: #18122B;
+    padding: 10px;
+}
+
+h1{
+    text-align: center;
+    color: white;
+}
+
+#pfps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+#pfps div{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    gap: 10px;
+}

@@ -1,0 +1,11 @@
+<img src="<?php echo $user['profile_image']; ?>" alt="<?php echo $user['name']; ?>">
+<h1><?php echo $user['name']; ?></h1>
+<p><?php echo $user['email']; ?></p>
+<a href="logout.php">Logout</a>
+
+
+
+
+bg #18122B
+prim #ccba1a
+light bg #3B364C
