@@ -62,7 +62,7 @@ if($user['username'] == ''){
     </div> -->
 
     <div id="header">
-        <img id="profile" src="<?php echo $user['profile_image']; ?>" alt="<?php echo $user['name']; ?>">
+        <a href="profile.php"><img id="profile" src="<?php echo $user['profile_image']; ?>" alt="<?php echo $user['name']; ?>"></a>
         <img id="logo" src="resources/logo.png">
         <i class="fa-solid fa-bars"></i>
     </div>

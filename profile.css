@@ -1,0 +1,146 @@
+#loader{
+    z-index: 999;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.603);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+body{
+    background-color: #18122B;
+}
+
+#header{
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+}
+
+#profile{
+    height: 85vh;
+    width: 100%;
+    background-color: #2E2645;
+    color: white;
+}
+
+#pfp{
+    border-radius: 100px;
+    position: relative;
+    top: -50px;
+    left: -20px;
+}
+
+#name{
+    position: relative;
+    left: -20px;
+    max-width: 300px;
+    font-size: 1.7em;
+    top: -50px;
+}
+
+#user-followers{
+    color: #b3b3b3;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 0 20px 0 30px;
+    position: relative;
+    top: -50px;
+    font-size: 1.2em;
+}
+
+.badge{
+    border-radius: 50px;
+    background-color: rgba(0, 255, 0, 0.2);
+    border: rgb(0, 207, 0) solid 1px;
+    padding: 5px 10px 5px 10px;
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+#badges{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    top: -50px;
+}
+
+.badge i{
+    margin-right: 10px;
+}
+
+#creator{
+    background-color: rgba(255, 0, 0, 0.2);
+    border: red solid 1px;
+}
+
+#staff{
+    background-color: rgba(0, 153, 255, 0.2);
+    border: rgb(0, 140, 255) solid 1px;
+}
+
+#writer{
+    background-color: rgba(251, 255, 0, 0.2);
+    border: rgb(251, 255, 0) solid 1px;
+}
+
+#interractive{
+    background-color: rgba(255, 0, 212, 0.2);
+    border: rgb(255, 0, 221) solid 1px;
+}
+
+#title{
+    display: flex;
+}
+
+#title a{
+    color: white;
+    position: relative;
+    top: -38px;
+    left: -43px;
+    color: #ccba1a;
+}
+
+#bio{
+    position: relative;
+    top: -30px;
+    left: -20px;
+    width: 300px;
+}
+
+#sep{
+    width: 10px;
+    height: 10px;
+    background-color: #CABBFF;
+    z-index: 10;
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    border-radius: 100px;
+}
+
+#posts{
+    position: relative;
+    top: 30px;
+    left: -20px;
+    width: 300px;
+}
+
+#posts h1{
+    font-size: 1.7em;
+}
+
+
+
+@media only screen and (min-width:657px) {
+    #user-followers{
+        justify-content: start;
+    }
+}
