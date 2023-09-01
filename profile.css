@@ -24,13 +24,15 @@ body{
     width: 100%;
     background-color: #2E2645;
     color: white;
+    overflow-y: scroll;
+    z-index: 5;
 }
 
 #pfp{
     border-radius: 100px;
     position: relative;
-    top: -50px;
     left: -20px;
+    top: 10px;
 }
 
 #name{
@@ -38,7 +40,6 @@ body{
     left: -20px;
     max-width: 300px;
     font-size: 1.7em;
-    top: -50px;
 }
 
 #user-followers{
@@ -48,7 +49,6 @@ body{
     gap: 40px;
     padding: 0 20px 0 30px;
     position: relative;
-    top: -50px;
     font-size: 1.2em;
 }
 
@@ -69,7 +69,6 @@ body{
     flex-wrap: wrap;
     align-items: center;
     position: relative;
-    top: -50px;
 }
 
 .badge i{
@@ -103,19 +102,23 @@ body{
 #title a{
     color: white;
     position: relative;
-    top: -38px;
+    top: -64px;
     left: -43px;
     color: #ccba1a;
 }
 
 #bio{
     position: relative;
-    top: -30px;
     left: -20px;
     width: 300px;
 }
 
-#sep{
+#bio p{
+    width: 300px;
+    word-wrap: break-word;
+}
+
+/* #sep{
     width: 10px;
     height: 10px;
     background-color: #CABBFF;
@@ -124,7 +127,7 @@ body{
     top: 77%;
     left: 50%;
     border-radius: 100px;
-}
+} */
 
 #posts{
     position: relative;

@@ -60,7 +60,7 @@ if($user['username'] == ''){
         <img id="pfp" src="<?php echo $user['profile_image']; ?>">
         <div id="title">
             <h1 id="name"><?php echo $user['name']; ?></h1>
-            <a href="#">تعديل الملف الشخصي</a>
+            <a href="EditProfile.php">تعديل الملف الشخصي</a>
         </div>
         
         <div id="user-followers">
@@ -81,13 +81,13 @@ if($user['username'] == ''){
             <?php
                 if($user['bio'] !== ""){
                     echo "<h1>نبذة تعريفية :</h1>";
-                    echo "<p>" . $user['bio'] . "</p>";
+                    echo "<p style='word-wrap: break-word'>" . $user['bio'] . "</p>";
                 }
             ?>
         </div>
 
 
-        <div id="sep"></div>
+        <!-- <div id="sep"></div> -->
 
         <div id="posts">
             <h1>المشاركات (<?php echo $user['post_count']; ?>)</h1>
