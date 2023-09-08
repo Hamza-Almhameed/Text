@@ -36,6 +36,7 @@ body{
     border-bottom: solid 1px #ccba1a;
     position: fixed;
     background-color: #18122B;
+    z-index: 2;
 }
 
 #header #profile{
@@ -56,8 +57,9 @@ body{
 }
 
 #posts{
-    height: 110vh;
+    height: 100vh;
     width: 100%;
+    padding: 100px 30px 0 20px;
 }
 
 #make-post{
@@ -79,4 +81,90 @@ body{
 
 #make-post i{
     font-size: 1.5em;
+}
+
+.post{
+    color: white;
+    width: 80%;
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.post .info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px 10px 30px;
+}
+
+.post .info .head{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.post .info .head img{
+    border-radius: 100px;
+    width: 60px;
+    cursor: pointer;
+}
+
+.post-content{
+    margin: 0 30px 0 30px;
+    color: rgb(224, 224, 224);
+    font-weight: 300;
+    font-size: 1.15em;
+}
+
+.interact{
+    margin: 10px 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.interact div{
+    font-size: 1.5em;
+}
+
+.info .head div p{
+    color: rgb(190, 190, 190);
+}
+
+button{
+    background-color: #28213E;
+    color: white;
+    border: #635985 solid 1px;
+    border-radius: 50px;
+    padding: 5px 10px 5px 10px;
+    width: 100px;
+}
+
+.sep{
+    background-color: #635985;
+    width: 100%;
+    height: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width:641px) {
+    .post{
+        width: 100%;
+    }
+
+    .post-content{
+        margin: 0;
+    }
+
+    .post .info{
+        padding: 10px 0 10px 0;
+    }
 }

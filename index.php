@@ -53,13 +53,6 @@ if($user['username'] == ''){
 <body dir='rtl'>
 
     <div id="loader"><img src="resources/loader.gif"></div>
-    
-    <!-- <div id="info">
-        <img src="<?php echo $user['profile_image']; ?>" alt="<?php echo $user['name']; ?>">
-        <h1><?php echo $user['name']; ?></h1>
-        <p><?php echo $user['username']; ?></p>
-        <a href="logout.php">تسجيل خروج</a>
-    </div> -->
 
     <div id="header">
         <a href="profile.php"><img id="profile" src="<?php echo $user['profile_image']; ?>" alt="<?php echo $user['name']; ?>"></a>
@@ -67,10 +60,60 @@ if($user['username'] == ''){
         <i class="fa-solid fa-bars"></i>
     </div>
 
-    <div id="posts"></div>
+    <div id="posts">
+
+
+        <?php
+        //loading posts
+        $readposts = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY rand()");
+        $result = mysqli_fetch_array($readposts);
+        if ($readposts->num_rows > 0) {
+            for ($i = 0; $i < $readposts->num_rows; $i++) {
+                $readposter = mysqli_query($db_connection, "SELECT * FROM users WHERE id = ".$result['poster_id']);
+                $poster = mysqli_fetch_assoc($readposter);
+                $likes = $result['likes'];
+                $comments = $result['comments'];
+
+                echo '<div class="post">
+                <div class="info">
+                    <div class="head">
+                        <img class="postProfile" src="'.$poster['profile_image'].'" alt="'.$poster['name'].'">
+                        <div>
+                            <h3>'.$poster['name'].'</h3>
+                            <p>'.$result['date'].'</p>
+                        </div>
+                    </div>
+                    <button>متابعة</button>
+                </div>
+
+                <p class="post-content">'.$result['content'].'</p>
+
+                <div class="interact">
+                    <div class="likes">
+                        <i class="fa-regular fa-heart"></i>
+                        <span>'.$result['likes'].'</span>
+                    </div>
+                    <div class="comments">
+                        <i class="fa-regular fa-comment"></i>
+                        <span>'.$result['comments'].'</span>
+                    </div>
+                    <div class="copy">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sep"></div>';
+            }
+
+        }
+        ?>
+
+
+    </div>
 
     <div id="make-post">
-        <i class="fa-solid fa-plus"></i>
+        <a style="color: white;" href="make-post.php"><i class="fa-solid fa-plus"></i></a>
     </div>
 
     <script src="script.js"></script>
