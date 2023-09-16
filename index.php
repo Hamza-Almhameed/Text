@@ -65,45 +65,53 @@ if($user['username'] == ''){
 
         <?php
         //loading posts
-        $readposts = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY rand()");
+        $readposts = mysqli_query($db_connection, "SELECT * FROM posts");
         $result = mysqli_fetch_array($readposts);
+        $getLastPost = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY id DESC LIMIT 1");
+        $lastPost = mysqli_fetch_array($getLastPost);
         if ($readposts->num_rows > 0) {
-            for ($i = 0; $i < $readposts->num_rows; $i++) {
-                $readposter = mysqli_query($db_connection, "SELECT * FROM users WHERE id = ".$result['poster_id']);
-                $poster = mysqli_fetch_assoc($readposter);
-                $likes = $result['likes'];
-                $comments = $result['comments'];
-
-                echo '<div class="post">
-                <div class="info">
-                    <div class="head">
-                        <img class="postProfile" src="'.$poster['profile_image'].'" alt="'.$poster['name'].'">
-                        <div>
-                            <h3>'.$poster['name'].'</h3>
-                            <p>'.$result['date'].'</p>
+            for ($i = 0; $i < $lastPost['id']+1; $i++) {
+                $readposts = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = '$i'");
+                $result = mysqli_fetch_array($readposts);
+                
+                if ($readposts->num_rows > 0) {
+                    $readposter = mysqli_query($db_connection, "SELECT * FROM users WHERE id = ".$result['poster_id']);
+                    $poster = mysqli_fetch_assoc($readposter);
+                    $likes = $result['likes'];
+                    $comments = $result['comments'];
+    
+                    echo '<div class="post">
+                    <div class="info">
+                        <div class="head">
+                            <img class="postProfile" src="'.$poster['profile_image'].'" alt="'.$poster['name'].'">
+                            <div>
+                                <h3>'.$poster['name'].'</h3>
+                                <p>'.$result['date'].'</p>
+                            </div>
                         </div>
+                        <button>متابعة</button>
                     </div>
-                    <button>متابعة</button>
+    
+                    <p class="post-content">'.$result['content'].'</p>
+    
+                    <form class="interact" action="index.php" method="post">
+                        <div class="likes">
+                            <i class="fa-regular fa-heart"></i>
+                            <span>'.$result['likes'].'</span>
+                        </div>
+                        <div class="comments">
+                            <i class="fa-regular fa-comment"></i>
+                            <span>'.$result['comments'].'</span>
+                        </div>
+                        <div class="copy">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>نسخ</span>
+                        </div>
+                    </form>
                 </div>
-
-                <p class="post-content">'.$result['content'].'</p>
-
-                <div class="interact">
-                    <div class="likes">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>'.$result['likes'].'</span>
-                    </div>
-                    <div class="comments">
-                        <i class="fa-regular fa-comment"></i>
-                        <span>'.$result['comments'].'</span>
-                    </div>
-                    <div class="copy">
-                        <i class="fa-regular fa-copy"></i>
-                        <span>نسخ</span>
-                    </div>
-                </div>
-            </div>
-            <div class="sep"></div>';
+                <div class="sep"></div>';
+                }
+                
             }
 
         }
