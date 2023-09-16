@@ -8,4 +8,6 @@
 <p>Thanks for checking!</p>
 <br>
 <h1>🚨IMPORTANT🚨</h1>
-<p>if you are looking to run this project in your local machine, you need a "google-api" folder inside the login folder in order to avoid errors when logging with google.</p>
+<ul>
+  <li>if you are looking to run this project in your local machine, you need a "google-api" folder inside the login folder in order to avoid errors when logging with google.</li>
+</ul>
