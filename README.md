@@ -9,6 +9,6 @@
 <br>
 <h1>🚨IMPORTANT🚨</h1>
 <ul>
-  <li>if you are looking to run this project in your local machine, you need a "google-api" folder inside the login folder in order to avoid errors when logging with google.</li>
+  <li>if you are looking to run this project in your local machine, you need:<br>1 - "google-api" folder inside the login folder in order to avoid errors when logging with google.</li>
   <li>This is a free open source project as long as you give credits to me (Ex: Adding my name while editing the project code), Any attempt to steal/copy this project without credits is not allowed in any case!</li>
 </ul>
