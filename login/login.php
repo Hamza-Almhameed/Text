@@ -12,9 +12,9 @@ require 'google-api/vendor/autoload.php';
 $client = new Google_Client();
 
 // Enter your Client ID
-$client->setClientId('889247687559-46qdbc68l5dqs09g9a7fc3oq569neleh.apps.googleusercontent.com');
+$client->setClientId('');
 // Enter your Client Secrect
-$client->setClientSecret('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');
+$client->setClientSecret('');
 // Enter the Redirect URL
 $client->setRedirectUri('http://localhost:8080/Text/login/login.php');
 
