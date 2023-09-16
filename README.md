@@ -10,8 +10,9 @@
 <h1>🚨IMPORTANT🚨</h1>
 <ul>
   <li>if you are looking to run this project in your local machine, you need to:
-    <br>1 - Add "google-api" folder inside the login folder in order to avoid errors when logging with google.
-    <br>2 - Add your google client ID and client secret in the login.php file.
+    <br>   1 - Add "google-api" folder inside the login folder in order to avoid errors when logging with google.
+    <br>   2 - Add your google client ID and client secret in the login.php file.
+    <br>   3 - Create a database with the correct names according to the code.
   </li>
   <li>This is a free open source project as long as you give credits to me (Ex: Adding my name while editing the project code), Any attempt to steal/copy this project without credits is not allowed in any case!</li>
 </ul>
