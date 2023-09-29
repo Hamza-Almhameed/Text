@@ -127,6 +127,10 @@ body{
     font-size: 1.5em;
 }
 
+.interact a{
+    color: white;
+}
+
 .info .head div p{
     color: rgb(190, 190, 190);
 }

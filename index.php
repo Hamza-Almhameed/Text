@@ -23,6 +23,27 @@ if($user['username'] == ''){
     exit;
 }
 
+
+if(isset($_POST['liked'])){
+    $postid = $_POST['postid'];
+    $result = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = $postid");
+    $row = mysqli_fetch_array($result);
+    $n = $row['likes'];
+
+    mysqli_query($db_connection, "UPDATE posts SET likes=$n+1 WHERE id = $postid");
+    mysqli_query($db_connection, "INSERT INTO likes (userid, postid) VALUES (".$user['id'].", $postid)");
+}
+
+if(isset($_POST['unliked'])){
+    $postid = $_POST['postid'];
+    $result = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = $postid");
+    $row = mysqli_fetch_array($result);
+    $n = $row['likes'];
+
+    mysqli_query($db_connection, "DELETE FROM likes WHERE postid = $postid");
+    mysqli_query($db_connection, "UPDATE posts SET likes=$n-1 WHERE id = $postid");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +69,7 @@ if($user['username'] == ''){
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title><?php echo $user['name']; ?> - نص</title>
+    <title>نص</title>
 </head>
 <body dir='rtl'>
 
@@ -77,6 +98,7 @@ if($user['username'] == ''){
                 if ($readposts->num_rows > 0) {
                     $readposter = mysqli_query($db_connection, "SELECT * FROM users WHERE id = ".$result['poster_id']);
                     $poster = mysqli_fetch_assoc($readposter);
+                    $readlikes = mysqli_query($db_connection, "SELECT * FROM likes WHERE userid = ".$user['id']." AND postid = ".$result['id']);
                     $likes = $result['likes'];
                     $comments = $result['comments'];
     
@@ -94,11 +116,21 @@ if($user['username'] == ''){
     
                     <p class="post-content">'.$result['content'].'</p>
     
-                    <form class="interact" action="index.php" method="post">
-                        <div class="likes">
-                            <i class="fa-regular fa-heart"></i>
-                            <span>'.$result['likes'].'</span>
-                        </div>
+                    <div class="interact" action="index.php" method="post">
+                        <div class="likes">';
+
+                        if(mysqli_num_rows($readlikes) !== 1){
+                            echo '<a href="" class="like" id="'.$result['id'].'"><i class="fa-regular fa-heart"></i></a>
+                            <span>'.$result['likes'].'</span>';
+                        }else{
+                            echo '<a href="" class="unlike" id="'.$result['id'].'"><i class="fa-solid fa-heart"></i></a>
+                            <span>'.$result['likes'].'</span>';
+                        }
+
+                            
+
+
+                        echo '</div>
                         <div class="comments">
                             <i class="fa-regular fa-comment"></i>
                             <span>'.$result['comments'].'</span>
@@ -107,7 +139,7 @@ if($user['username'] == ''){
                             <i class="fa-regular fa-copy"></i>
                             <span>نسخ</span>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="sep"></div>';
                 }
@@ -119,11 +151,12 @@ if($user['username'] == ''){
 
 
     </div>
-
+    
     <div id="make-post">
         <a style="color: white;" href="make-post.php"><i class="fa-solid fa-plus"></i></a>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>
