@@ -86,12 +86,12 @@ if(isset($_POST['unliked'])){
 
         <?php
         //loading posts
-        $readposts = mysqli_query($db_connection, "SELECT * FROM posts");
-        $result = mysqli_fetch_array($readposts);
+        // $readposts = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY id DESC LIMIT 1");
+        // $result = mysqli_fetch_array($readposts);
         $getLastPost = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY id DESC LIMIT 1");
         $lastPost = mysqli_fetch_array($getLastPost);
-        if ($readposts->num_rows > 0) {
-            for ($i = 0; $i < $lastPost['id']+1; $i++) {
+        // if ($readposts->num_rows > 0) {
+            for ($i = $lastPost['id']+1; $i > 0; $i--) {
                 $readposts = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = '$i'");
                 $result = mysqli_fetch_array($readposts);
                 
@@ -105,7 +105,7 @@ if(isset($_POST['unliked'])){
                     echo '<div class="post">
                     <div class="info">
                         <div class="head">
-                            <img class="postProfile" src="'.$poster['profile_image'].'" alt="'.$poster['name'].'">
+                            <a href="user.php?id='.$poster['id'].'"><img class="postProfile" src="'.$poster['profile_image'].'" alt="'.$poster['name'].'"></a>
                             <div>
                                 <h3>'.$poster['name'].'</h3>
                                 <p>'.$result['date'].'</p>
@@ -114,9 +114,9 @@ if(isset($_POST['unliked'])){
                         <button>متابعة</button>
                     </div>
     
-                    <p class="post-content">'.$result['content'].'</p>
+                    <p class="post-content" id="p'.$result['id'].'">'.$result['content'].'</p>
     
-                    <div class="interact" action="index.php" method="post">
+                    <div class="interact">
                         <div class="likes">';
 
                         if(mysqli_num_rows($readlikes) !== 1){
@@ -135,7 +135,7 @@ if(isset($_POST['unliked'])){
                             <i class="fa-regular fa-comment"></i>
                             <span>'.$result['comments'].'</span>
                         </div>
-                        <div class="copy">
+                        <div class="copy" id="cp'.$result['id'].'">
                             <i class="fa-regular fa-copy"></i>
                             <span>نسخ</span>
                         </div>
@@ -146,7 +146,7 @@ if(isset($_POST['unliked'])){
                 
             }
 
-        }
+        //}
         ?>
 
 

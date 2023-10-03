@@ -23,34 +23,24 @@ if($user['username'] == ''){
     exit;
 }
 
-
-if(isset($_POST['liked'])){
-    $postid = $_POST['postid'];
-    $result = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = $postid");
-    $row = mysqli_fetch_array($result);
-    $n = $row['likes'];
-
-    mysqli_query($db_connection, "UPDATE posts SET likes=$n+1 WHERE id = $postid");
-    mysqli_query($db_connection, "INSERT INTO likes (userid, postid) VALUES (".$user['id'].", $postid)");
+if(!isset($_GET['id'])){
+    header('Location: index.php');
 }
 
-if(isset($_POST['unliked'])){
-    $postid = $_POST['postid'];
-    $result = mysqli_query($db_connection, "SELECT * FROM posts WHERE id = $postid");
-    $row = mysqli_fetch_array($result);
-    $n = $row['likes'];
 
-    mysqli_query($db_connection, "DELETE FROM likes WHERE postid = $postid");
-    mysqli_query($db_connection, "UPDATE posts SET likes=$n-1 WHERE id = $postid");
-}
+
+
+$getUserView = mysqli_query($db_connection, "SELECT * FROM users WHERE id = " . $_GET['id']);
+$userView = mysqli_fetch_array($getUserView);
 
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- favicon -->
@@ -70,54 +60,46 @@ if(isset($_POST['unliked'])){
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>نص - <?php echo $user['name']; ?></title>
+    <title>نص - <?php echo $userView['name']; ?></title>
 </head>
 <body dir='rtl'>
     
-    <div id="loader"><img src="resources/loader.gif"></div>
+<div id="loader"><img src="resources/loader.gif"></div>
 
-    <div id="header"><img src="resources/logo.png"></div>
+<div id="header"><img src="resources/logo.png"></div>
 
-    <div id="profile">
-        <img id="pfp" src="<?php echo $user['profile_image']; ?>">
-        <div id="title">
-            <h1 id="name"><?php echo $user['name']; ?></h1>
-            <a id="editProfile" href="EditProfile.php">تعديل الملف الشخصي</a>
-            <a id="logout" href="logout.php">تسجيل الخروج</a>
-        </div>
-        
-        <div id="user-followers">
-            <p id="username"><?php echo $user['username']; ?></p>
-            <span style="color: #CABBFF; font-weight: 800; font-size:larger">-</span>
-            <p id="followers"><?php echo $user['followers']; ?> متابع</p>
-        </div>
-        <div id="badges">
-            <?php echo $user['badges']; ?>
-            
-            <!-- <div class="badge" id="creator">المؤسس <i class="fa-solid fa-seedling"></i></div>
-            <div class="badge" id="staff">الادارة <i class="fa-solid fa-shield-halved"></i></div>
-            <div class="badge" id="active">نشط <i class="fa-solid fa-bolt"></i></div>
-            <div class="badge" id="writer">كاتب <i class="fa-solid fa-pen"></i></div>
-            <div class="badge" id="interractive">متفاعل <i class="fa-solid fa-fire"></i></div> -->
-        </div>
-        <div id="bio">
-            <?php
-                if($user['bio'] !== ""){
-                    echo "<h1>نبذة تعريفية :</h1>";
-                    echo "<p style='word-wrap: break-word'>" . $user['bio'] . "</p>";
-                }
-            ?>
-        </div>
+<div id="profile">
+    <img id="pfp" src="<?php echo $userView['profile_image']; ?>">
+    <div id="title">
+        <h1 id="name"><?php echo $userView['name']; ?></h1>
+    </div>
+    
+    <div id="user-followers">
+        <p id="username"><?php echo $userView['username']; ?></p>
+        <span style="color: #CABBFF; font-weight: 800; font-size:larger">-</span>
+        <p id="followers"><?php echo $userView['followers']; ?> متابع</p>
+    </div>
+
+    <div id="badges">
+        <?php echo $userView['badges']; ?>
+    </div>
+
+    <div id="bio">
+        <?php
+            if($userView['bio'] !== ""){
+                echo "<h1>نبذة تعريفية :</h1>";
+                echo "<p style='word-wrap: break-word'>" . $user['bio'] . "</p>";
+            }
+        ?>
+    </div>
 
 
-        <!-- <div id="sep"></div> -->
-
-        <div id="posts">
+    <div id="posts">
 
             
             <!-- count posts to show them in posts title -->
             <?php
-                $countPosts = mysqli_query($db_connection, "SELECT COUNT(*) AS num_rows FROM posts WHERE poster_id = ".$user['id']."");
+                $countPosts = mysqli_query($db_connection, "SELECT COUNT(*) AS num_rows FROM posts WHERE poster_id = ".$userView['id']."");
                 $postsSum = $countPosts->fetch_assoc();
             ?>
                 
@@ -129,13 +111,13 @@ if(isset($_POST['unliked'])){
             $getLastPost = mysqli_query($db_connection, "SELECT * FROM posts ORDER BY id DESC LIMIT 1");
             $lastPost = mysqli_fetch_array($getLastPost);
                 for ($i = $lastPost['id']; $i > 0; $i--) {
-                    $readposts = mysqli_query($db_connection, "SELECT * FROM posts WHERE poster_id = '".$user['id']."' AND id = ".$i."");
+                    $readposts = mysqli_query($db_connection, "SELECT * FROM posts WHERE poster_id = '".$userView['id']."' AND id = ".$i."");
                     $result = mysqli_fetch_array($readposts);
                 
                     if ($readposts->num_rows > 0) {
                         $readposter = mysqli_query($db_connection, "SELECT * FROM users WHERE id = ".$result['poster_id']);
                         $poster = mysqli_fetch_assoc($readposter);
-                        $readlikes = mysqli_query($db_connection, "SELECT * FROM likes WHERE userid = ".$user['id']." AND postid = ".$result['id']);
+                        $readlikes = mysqli_query($db_connection, "SELECT * FROM likes WHERE userid = ".$userView['id']." AND postid = ".$result['id']);
                         $likes = $result['likes'];
                         $comments = $result['comments'];
     
@@ -185,12 +167,13 @@ if(isset($_POST['unliked'])){
         ?>
 
         </div>
-    </div>
+</div>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="script.js"></script>
+
 </body>
 </html>

@@ -99,12 +99,18 @@ body{
     display: flex;
 }
 
-#title a{
-    color: white;
+#title #editProfile{
     position: relative;
     top: -64px;
     left: -70px;
     color: #ccba1a;
+}
+
+#title #logout{
+    position: relative;
+    top: -27px;
+    left: 76px;
+    color: #cc521a;
 }
 
 #bio{
@@ -116,6 +122,10 @@ body{
 #bio p{
     width: 300px;
     word-wrap: break-word;
+}
+
+#bio h1{
+    font-size: 1.7em;
 }
 
 /* #sep{
@@ -132,13 +142,110 @@ body{
 #posts{
     position: relative;
     top: 30px;
-    left: -20px;
-    width: 300px;
+    padding: 0 20px 0 0;
+    width: 100%;
 }
 
 #posts h1{
     font-size: 1.7em;
 }
+
+.post{
+    color: white;
+    width: 100%;
+    position: relative;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.post .info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px 10px 30px;
+}
+
+.post .info .head{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.post .info .head img{
+    border-radius: 100px;
+    width: 60px;
+    cursor: pointer;
+}
+
+.post-content{
+    margin: 0 30px 0 30px;
+    color: rgb(224, 224, 224);
+    font-weight: 300;
+    font-size: 1.15em;
+}
+
+.interact{
+    margin: 10px 30px 0 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.interact div{
+    font-size: 1.5em;
+}
+
+.interact a{
+    color: white;
+}
+
+.info .head div p{
+    color: rgb(190, 190, 190);
+}
+
+button{
+    background-color: #28213E;
+    color: white;
+    border: #635985 solid 1px;
+    border-radius: 50px;
+    padding: 5px 10px 5px 10px;
+    width: 100px;
+}
+
+.sep{
+    background-color: #635985;
+    width: 100%;
+    height: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.unlike i{
+    color: #ccba1a;
+}
+
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #18122B #2E2645;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #18122B;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2E2645;
+    border-radius: 15px;
+    border: 0px solid #ffffff;
+  }
 
 
 

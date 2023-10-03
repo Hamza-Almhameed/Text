@@ -152,6 +152,32 @@ button{
     margin-bottom: 10px;
 }
 
+.unlike i{
+    color: #ccba1a;
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #18122B #2E2645;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #18122B;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #2E2645;
+    border-radius: 15px;
+    border: 0px solid #ffffff;
+  }
+
 
 
 
